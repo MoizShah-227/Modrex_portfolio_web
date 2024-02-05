@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+.navbar .container h1{
+    color: white;
+    font-size: 40px;
+    font-weight: 500;
+    font-family: var(--poppins);
+    font-style: inherit;  
+}
+.navbar .container h1 span{
+    color: var(--org);
+    font-size: 45px;
+    font-weight: 800
+}
+
+.navbar .container .navbar-collapse ul li{
+    padding: 12px;   
+}
+.navbar .container .navbar-collapse ul li a{
+       color: white;
+       font-family: var(--poppins);
+       font-size: 18px;
+       font-weight: 400;
+       transform: 0.8s;
+    }
+.navbar .container .navbar-collapse ul li a:hover{
+    color: rgb(131, 127, 127);
+    transform: translateY(-1px);
+}
