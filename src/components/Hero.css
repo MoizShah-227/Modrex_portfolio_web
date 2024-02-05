@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap');
+.hero-main .container .row{
+    animation-duration: 1.4s;
+    animation-name: slidein;
+}
+.hero-main .container .row .left h1{
+    font-size: 50px;
+    font-family: "Kanit", sans-serif;
+    font-weight: 700;   
+    
+}
+.hero-main .container .row .left h1 span{
+    color: var(--org);
+    font-size: 50px;
+    font-weight: 800;
+}
+.hero-main .container .row .left button{
+    width: 140px;
+    height: 50px;
+    background-color: var(--org);
+    color: white;
+    font-size: 18px;
+    font-family: "Kanit", sans-serif;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    transform: 1s;
+}
+
+/* .hero-main .container .row .right .right-side-img{
+    animation-duration: 1.4s;
+    animation-name: slidein;
+} */
+@keyframes slidein{
+    from{
+        margin-top: 100%;
+    }
+    to{
+        margin-bottom: 0;
+    }
+}
+
+
+.hero-main .container .row .left button:hover{
+    background-color:#dd6c09d0;
+    transform: translateY(-1px);
+}
+ 
+
