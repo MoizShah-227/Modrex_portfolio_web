@@ -1,0 +1,22 @@
+.about-page .container .heading{
+    font-size: 55px;
+    font-family: "Kanit", sans-serif;
+    font-weight: 700;   
+    color: #dd6c09d0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about-page .container .row{
+    display: flex;
+    align-items: center;
+}
+.about-page .container .left p{
+    font-size: 18px;
+    font-family: "Kanit", sans-serif;
+    font-weight:300;
+    line-height: 28px;
+}
+.about-page .container .right .gif-img{
+    width: 100%;
+}
