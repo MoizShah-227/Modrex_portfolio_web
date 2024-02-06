@@ -1,0 +1,70 @@
+body{
+    overflow-x: hidden;
+}
+.portfolio-page .container .heading{
+    font-size: 55px;
+    font-family: "Kanit", sans-serif;
+    font-weight: 700;   
+    color: #dd6c09d0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.portfolio-page .container .contain-slider{
+    display: flex;
+    overflow: hidden; 
+
+}
+.portfolio-page .container .slider{
+    display: flex;
+    align-items: center;
+}
+.portfolio-page .container .slider a{
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    transform: 1s;
+}
+.portfolio-page .container .slider .box:hover{
+    transform: translateY(-2px);
+    border: 1px solid #dd6c099c;
+    box-shadow: 0px 3px 3px 0px #dd6c09a9;
+
+}
+.portfolio-page .container .slider .btn i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: 800;
+    font-style: bold;
+    color: #dd6c09d0;
+
+}
+.portfolio-page .container .slider .btn{
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+    background-color: transparent;
+    border-color: transparent;
+    transition: 0.3s;
+}
+.portfolio-page .container .slider .btn:hover{
+    box-shadow: 0 12px 16px 0 rgba(240, 144, 0, 0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    
+    /* background-color:#b16c30d0; */
+}
+.portfolio-page .container .slider .box{
+    margin: 12px;
+    width: 450px;
+    height: 350px;
+    border-radius: 12px;
+    border: 1px solid #dd6c09d0;
+    box-shadow: 0px 3px 3px 0px #dd6c09d0;
+
+}
+.portfolio-page .container .slider .box .inner-box{
+    margin-top: 30px;
+    margin-left: 24px;
+    
+}
