@@ -1,55 +1,73 @@
-import { addDoc, collection} from "firebase/firestore";
-import { useState } from "react";
-import {db} from './Config'
-function StoreImageTextFirebase(){
-    const [txt,setTxt] = useState('')
-    const [img,setImg] = useState('')
-    const[textlink,settextlink] = useState('')
-    const [data,setData] = useState([])
+import { addDoc, collection } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-    
+import { db, storage } from './Config'; // Ensure correct import from your configuration file
+import { v4 } from "uuid";
 
-    // const handleUpload = (e) =>{
-    //     console.log(e.target.files[0])
-    //     const imgs = ref(imgDB,`Imgs/${v4()}`)
-    //     uploadBytes(imgs,e.target.files[0]).then(data=>{
-    //         console.log(data,"imgs")
-    //         getDownloadURL(data.ref).then(val=>{
-    //             setImg(val)
-    //         })
-    //     })
-    // }
+function StoreImageTextFirebase() {
+  const [txt, setTxt] = useState("");
+  const [img, setImg] = useState(null); // Use null for initial state
+  const [textlink, setTextLink] = useState("");
+  const [imageUrl, setImageUrl] = useState(""); // To store the uploaded image URL
 
-    const handleClick =  () =>{
-        try {
-            const docRef =  addDoc(collection(db, "product"), {
-              ProjectName: txt,
-              projectLink: textlink
-            });
-            console.log("Document written with ID: ", docRef.id);
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
+  const handleImageChange = (event) => {
+    const selectedImage = event.target.files[0];
+    if (!selectedImage) {
+      console.error("No image selected.");
+      return;
+    }
+    setImg(selectedImage); // Update state with the selected image file
+  };
+
+  const handleClick = async () => {
+    if (!txt || !textlink || !img) {
+      console.error("Please fill in all fields and select an image.");
+      return;
     }
 
-    console.log('text: ',txt)
-    console.log('link: ',textlink)
+    try {
+      // 1. Upload the image to Firebase Storage
+      const imageRef = ref(storage, `images/${v4()}`); // Generate a unique filename
+      await uploadBytes(imageRef, img);
 
-    return(
-        <div>
-             <input onChange={(e)=>setTxt(e.target.value)} /><br/>
-             <input onChange={(e)=>settextlink(e.target.value)} /><br/>
-             {/* <input type="file" onChange={(e)=>handleUpload(e)} /><br/><br/> */}
-             <button onClick={handleClick}>Add</button>
+      // 2. Get the download URL
+      const url = await getDownloadURL(imageRef);
+       const getimglink = url
+      setImageUrl(url); // Store the URL for display
+      
+      // 3. Create a document in Firestore with text and image URL
+      console.log("URL",getimglink)
+      const docRef = await addDoc(collection(db, "product"), {
+        
+        ProjectName: txt,
+        projectLink: textlink,
+        imgurl :getimglink,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (error) {
+      console.error("Error saving image or document:", error);
+    }
+  };
 
-             {
-                data.map(value=><div>
-                    {/* <h1>{value.txtVal}</h1> */}
-                    {/* <img src={value.imgUrl} height='200px' width='200px' />  */}
-                </div>)
-             }
-        </div>
-    );
+  return (
+    <div>
+      <input
+        onChange={(e) => setTxt(e.target.value)}
+        placeholder="Project Name"
+      />
+      <br />
+      <input
+        onChange={(e) => setTextLink(e.target.value)}
+        placeholder="Project Link"
+      />
+      <br />
+      <input type="file" onChange={handleImageChange} />
+      <br />
+      <button onClick={handleClick}>Add</button>
+      {imageUrl && <img src={imageUrl} alt="Uploaded Image" />}
+    </div>
+  );
 }
-export default StoreImageTextFirebase;
 
+export default StoreImageTextFirebase;
