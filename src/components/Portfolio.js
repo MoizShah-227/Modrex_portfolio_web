@@ -2,11 +2,6 @@ import React, { useRef,useState,useEffect} from 'react';
 import { collection, getDocs, query } from "firebase/firestore";
 import { db} from './Config';
 import './Portfolio.css';
-import arrowright from '../img/arrow-right.svg'
-import arrowleft from '../img/arrow-left.svg'
-import img1 from '../img/Screenshot (5).png';
-import img2 from '../img/Screenshot (8).png';
-import img3 from '../img/Screenshot (9).png';
 
 const Portfolio = () => {
   const [dataArray, setDataArray] = useState([]);
