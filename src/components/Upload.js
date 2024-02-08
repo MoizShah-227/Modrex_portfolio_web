@@ -45,9 +45,11 @@ function StoreImageTextFirebase() {
         imgurl :getimglink,
       });
       console.log("Document written with ID: ", docRef.id);
+      
     } catch (error) {
       console.error("Error saving image or document:", error);
     }
+    
   };
 
   return (
@@ -65,7 +67,7 @@ function StoreImageTextFirebase() {
       <input type="file" onChange={handleImageChange} />
       <br />
       <button onClick={handleClick}>Add</button>
-      {imageUrl && <img src={imageUrl} alt="Uploaded Image" />}
+      {/* {imageUrl && <img src={imageUrl} alt="Uploaded Image" />} */}
     </div>
   );
 }

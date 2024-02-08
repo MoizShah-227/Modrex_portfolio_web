@@ -1,4 +1,6 @@
 import React, { useRef,useState,useEffect} from 'react';
+import { collection, getDocs, query } from "firebase/firestore";
+import { db} from './Config';
 import './Portfolio.css';
 import arrowright from '../img/arrow-right.svg'
 import arrowleft from '../img/arrow-left.svg'
@@ -7,7 +9,31 @@ import img2 from '../img/Screenshot (8).png';
 import img3 from '../img/Screenshot (9).png';
 
 const Portfolio = () => {
-    const containerRef = useRef(null);
+  const [dataArray, setDataArray] = useState([]);
+
+  
+  const fetchAllData = async () => {
+    try {
+      const dataRef = collection(db, "product");
+      const q = query(dataRef);
+      const snapshot = await getDocs(q);
+
+      const newDataArray = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setDataArray(newDataArray);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllData();
+  }, []); // Trigger the fetch on component mount
+
+  
+
+
+
+  const containerRef = useRef(null);
     const [scrollPosition, setScrollPosition] = useState(0);
   
     const handleScrollLeft = () => {
@@ -22,6 +48,7 @@ const Portfolio = () => {
         containerRef.current.scrollLeft = scrollPosition;
       }, [scrollPosition, containerRef]);
     
+
   return (
     <div className='portfolio-page mt-5 pt-5' id='portfolio'>
       <div className='container mt-5'>
@@ -31,39 +58,24 @@ const Portfolio = () => {
         <button onClick={handleScrollLeft} className='btn btn-light'><i class="bi bi-chevron-left"></i></button>
       <div className='contain-slider' ref={containerRef} style={{ overflowX: 'hidden' }}>
         {/* START */}
-        <a href='https://www.w3schools.com/html/html_links.asp' target="_blank">
-     <div className='box'>
-            <div className='inner-box'>
-                <img src={img1} width={400}/>
-                <h5 className='tagline mt-4'>Project Name: Monkey</h5> 
-            </div>
-        </div>
-        </a>
+        {
+          
+          dataArray.map((item)=>{
 
-        <a href='https://www.w3schools.com/html/html_links.asp' target="_blank">
-     <div className='box'>
-            <div className='inner-box'>
-                <img src={img1} width={400}/>
-                <h5 className='tagline mt-4'>Project Name: Monkey</h5> 
-            </div>
-        </div>
-        </a>
-        <a href='https://www.w3schools.com/html/html_links.asp' target="_blank">
-     <div className='box'>
-            <div className='inner-box'>
-                <img src={img1} width={400}/>
-                <h5 className='tagline mt-4'>Project Name: Monkey</h5> 
-            </div>
-        </div>
-        </a>
-        <a href='https://www.w3schools.com/html/html_links.asp' target="_blank">
-     <div className='box'>
-            <div className='inner-box'>
-                <img src={img1} width={400}/>
-                <h5 className='tagline mt-4'>Project Name: Monkey</h5> 
-            </div>
-        </div>
-        </a>
+                return(
+                  <a href={item.projectLink} target="_blank" key={item.id}>
+                  <div className='box'>
+                         <div className='inner-box'>
+                             <img src={item.imgurl} width={400}/>
+                             <h5 className='tagline mt-4'>Project Name: {item.ProjectName}</h5> 
+                         </div>
+                     </div>
+                     </a>
+                  );
+          })
+        }
+       
+
         {/* END */}
       </div>
       <button onClick={handleScrollRight} className='btn btn-light'><i class="bi bi-chevron-right"></i></button>
