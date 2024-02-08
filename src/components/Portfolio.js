@@ -45,7 +45,7 @@ const Portfolio = () => {
     
 
   return (
-    <div className='portfolio-page mt-5 pt-5' id='portfolio'>
+    <div className='portfolio-page mt-5 pt-5 py-5' id='portfolio'>
       <div className='container mt-5'>
         <h1 className='heading'>Portfolio</h1>
         

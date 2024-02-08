@@ -25,6 +25,7 @@
        font-weight: 400;
        transform: 0.8s;
     }
+    
 .navbar .container .navbar-collapse ul li a:hover{
     color: rgb(131, 127, 127);
     transform: translateY(-1px);
