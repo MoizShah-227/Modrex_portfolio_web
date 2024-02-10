@@ -32,11 +32,11 @@ const Portfolio = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
   
     const handleScrollLeft = () => {
-      setScrollPosition((prevPosition) => Math.max(prevPosition - 200, 0));
+      setScrollPosition((prevPosition) => Math.max(prevPosition - 430, 0));
     };
   
     const handleScrollRight = () => {
-      setScrollPosition((prevPosition) => Math.min(prevPosition + 200, containerRef.current.scrollWidth - containerRef.current.clientWidth));
+      setScrollPosition((prevPosition) => Math.min(prevPosition + 430, containerRef.current.scrollWidth - containerRef.current.clientWidth));
     };
 
     useEffect(() => {

@@ -45,3 +45,9 @@
 }
  
 
+@media screen and (max-width: 768px) {
+    .hero-main .container .row .right .right-side-img{
+        width: 80%;
+        
+    }
+  }
