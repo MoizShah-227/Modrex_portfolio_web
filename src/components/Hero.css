@@ -38,7 +38,11 @@
     }
 }
 
-
+.hero-main .container .row .left button a{
+    text-decoration: none;
+    color: white;
+    
+}
 .hero-main .container .row .left button:hover{
     background-color:#dd6c09d0;
     transform: translateY(-1px);
